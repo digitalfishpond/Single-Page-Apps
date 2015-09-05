@@ -8,6 +8,9 @@ forecastApp.config(function($routeProvider) {
         }).when('/forecastpage', {
             templateUrl: 'pages/forecastpage.html',
             controller: 'forecastController'
+        }).when('/forecastpage/:days', {
+            templateUrl: 'pages/forecastpage.html',
+            controller: 'forecastController'
         }).otherwise('/homepage', {
             templateUrl: 'pages/homepage.html',
             controller: 'homepageController'
@@ -29,11 +32,13 @@ forecastApp.controller('homepageController', ['$scope', 'cityNameService', funct
 
 }]);
 
-forecastApp.controller('forecastController', ["$scope", "$resource", "cityNameService", function($scope , $resource, cityNameService) {
+forecastApp.controller('forecastController', ["$scope", "$resource", "$routeParams", "cityNameService", function($scope , $resource, $routeParams, cityNameService) {
     $scope.cityName = cityNameService.cityNameFromService;
 
+    $scope.days = $routeParams.days || 2;
+
     $scope.weatherAPI = $resource("http://api.openweathermap.org/data/2.5/forecast/daily", {callback: "JSON_CALLBACK"}, { get: { method: "JSONP" }} );
-    $scope.weatherResult = $scope.weatherAPI.get({q: $scope.cityName, units: "metric", cnt: 7});
+    $scope.weatherResult = $scope.weatherAPI.get({q: $scope.cityName, units: "metric", cnt: $scope.days });
     console.log($scope.weatherResult);
 
     $scope.convertToDate = function(dt) {

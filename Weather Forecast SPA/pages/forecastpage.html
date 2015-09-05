@@ -2,6 +2,13 @@
 
 <h1> Forecast for: {{cityName}}</h1>
 
+<hr />
+Days: <a href="#/forecastpage/3" ng-class="{ 'bg-primary': days === '3'
+}">3</a> | <a href="#/forecastpage/5" ng-class="{ 'bg-primary': days === '5'
+}">5</a> | <a href="#/forecastpage/7" ng-class="{ 'bg-primary': days === '7'
+}">7</a> |
+<hr />
+
 <div ng-repeat="item in weatherResult.list">
     <div class="row">
         <div class="col-md-12">
