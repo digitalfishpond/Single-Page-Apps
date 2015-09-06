@@ -1,4 +1,6 @@
-
+<p>
+    <a href="#/">Back to Search</a>
+</p>
 
 <h1> Forecast for: {{cityName}}</h1>
 
@@ -12,14 +14,7 @@ Days: <a href="#/forecastpage/3" ng-class="{ 'bg-primary': days === '3'
 <div ng-repeat="item in weatherResult.list">
     <div class="row">
         <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">{{convertToDate(item.dt) | date: 'EEEE d MMM y'}}</h3>
-                </div>
-                <div class="panel-body">
-                    Daytime temperature: {{item.temp.day}}
-                </div>
-            </div>
+            <weather-report weather-day="item" convert-to-a-date="convertToDate(dt)" date-format="EEEE d MMM y"></weather-report>
         </div>
     </div>
 </div>
